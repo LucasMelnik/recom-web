@@ -1,5 +1,9 @@
+import { Button } from "antd";
+
 export default function CreateOrder() {
   return (
-    <h1>Create Order</h1>
+    <>
+      <Button type="primary">Novo Pedido</Button>
+    </>
   );
 }
