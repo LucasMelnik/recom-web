@@ -1,10 +1,18 @@
+import { useContext } from 'react'
 import { Button, Card, Col, Divider, Space } from 'antd'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
+import { Context } from '../../context/AuthContext'
+
 export default function Login() {
+  const { handleLogin, authenticated } = useContext(Context)
   const { register, handleSubmit } = useForm()
-  const onSubmit = data => console.log(data)
+
+  const onSubmit = async data => {
+    console.log(data)
+    await handleLogin(data)
+  }
 
   return(
     <Col span={12} offset={6}>
@@ -20,7 +28,7 @@ export default function Login() {
               </div>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <label style={{ marginBottom: '5px'}}>Senha</label>
-                <input placeholder='Senha' {...register('password')}/>
+                <input type="password" placeholder='Senha' {...register('password')}/>
               </div>
 
               <Divider>
