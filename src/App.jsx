@@ -1,22 +1,17 @@
 import { BrowserRouter } from 'react-router-dom'
-import Routes from "./Routes";
 import 'antd/dist/antd.css'
 import './App.css'
 
-import Header from './core/layout/menu/Header';
-
 import { AuthProvider } from './context/AuthContext'
+import MainScene from './core/layout/MainScene';
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-          <Header />
-          <div className='body'>
-            <Routes />
-          </div>
-      </BrowserRouter>
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+          <MainScene />
+      </AuthProvider>
+    </BrowserRouter>
   )
 }
 

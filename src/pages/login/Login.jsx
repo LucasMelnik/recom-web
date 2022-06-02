@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
 import { Context } from '../../context/AuthContext'
+import api from '../../config/api'
 
 export default function Login() {
   const { handleLogin, authenticated } = useContext(Context)
   const { register, handleSubmit } = useForm()
 
   const onSubmit = async data => {
-    console.log(data)
     await handleLogin(data)
   }
 
@@ -24,7 +24,7 @@ export default function Login() {
 
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <label style={{ marginBottom: '5px'}}>E-mail</label>
-                <input {...register('email', { required: true })}/>
+                <input {...register('email')}/>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <label style={{ marginBottom: '5px'}}>Senha</label>
