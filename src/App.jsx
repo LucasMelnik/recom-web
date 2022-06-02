@@ -1,27 +1,17 @@
-import { Layout } from 'antd';
-import { Header } from 'antd/lib/layout/layout';
+import { BrowserRouter } from 'react-router-dom'
 import 'antd/dist/antd.css'
 import './App.css'
 
-import { BrowserRouter } from 'react-router-dom'
-import Routes from "./Routes";
-import Navigation from './layout/menu/Navigation';
+import { AuthProvider } from './context/AuthContext'
+import MainScene from './core/layout/MainScene';
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Layout className='layout'>
-          <Header>
-              <Navigation />
-          </Header>
-
-          <div className='body'>
-            <Routes />
-          </div>
-        </Layout>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <AuthProvider>
+          <MainScene />
+      </AuthProvider>
+    </BrowserRouter>
   )
 }
 
