@@ -3,7 +3,7 @@ import 'antd/dist/antd.css'
 import './App.css'
 
 import { AuthProvider } from './context/AuthContext'
-import MainScene from './core/layout/MainScene';
+import MainScene from './core/MainScene';
 
 function App() {
   return (
