@@ -4,10 +4,9 @@ import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
 import { Context } from '../../context/AuthContext'
-import api from '../../config/api'
 
 export default function Login() {
-  const { handleLogin, authenticated } = useContext(Context)
+  const { handleLogin } = useContext(Context)
   const { register, handleSubmit } = useForm()
 
   const onSubmit = async data => {
