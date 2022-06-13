@@ -5,6 +5,7 @@ import { Context } from './context/AuthContext'
 import Login from './pages/login/Login'
 import CreateOrder from './pages/order/CreateOrder'
 import OrderList from './pages/order/OrderList'
+import Customer from './pages/Customer/index'
 
 export default function Routes() {
   const { loading } = useContext(Context)
@@ -16,8 +17,9 @@ export default function Routes() {
   return(
     <Switch>
       {/* <Route path="/auth" element={<Login/>} /> */}
-      <Route path="/orders" element={<OrderList/>} />
+      <Route path="/orders" exact element={<OrderList/>} />
       <Route path="/orders/new" element={<CreateOrder/>} />
+      <Route path="/customers/new" element={<Customer/>} />
     </Switch>
     )
 }
