@@ -15,9 +15,9 @@ export default function Routes() {
 
   return(
     <Switch>
-      {/* <Route path="/auth" element={<Login/>} /> */}
-      <Route path="/orders" element={<OrderList/>} />
-      <Route path="/orders/new" element={<CreateOrder/>} />
+      <Route path="orders" element={<OrderList/>}>
+        <Route path="new" element={<CreateOrder/>} />
+      </Route>
     </Switch>
     )
 }
