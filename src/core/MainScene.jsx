@@ -11,7 +11,7 @@ export default function MainScene() {
     return (
       <>
       <Header />
-      <div className='body'>
+        <div className='body'>
         <Routes />
       </div>
       </>
