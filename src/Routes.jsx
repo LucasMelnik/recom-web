@@ -2,8 +2,7 @@ import { useContext } from 'react'
 import { Routes as Switch, Route } from 'react-router-dom'
 import { Context } from './context/AuthContext'
 
-import Login from './pages/login/Login'
-import CreateOrder from './pages/order/CreateOrder'
+import EditOrder from './pages/order/EditOrder'
 import OrderList from './pages/order/OrderList'
 
 export default function Routes() {
@@ -15,9 +14,8 @@ export default function Routes() {
 
   return(
     <Switch>
-      <Route path="orders" element={<OrderList/>}>
-        <Route path="new" element={<CreateOrder/>} />
-      </Route>
+      <Route path="orders" element={<OrderList/>} />
+      <Route path="orders/:id/edit" element={<EditOrder/>} />
     </Switch>
     )
 }
