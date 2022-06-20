@@ -8,8 +8,8 @@ import { useNavigate } from 'react-router-dom';
 function CreateFactory() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [factory, setFactory] = useState({
-    corporateName: '',
-    fantasyName: '',
+    corporate_name: '',
+    fantasy_name: '',
     cnpj: '',
     phone: '',
     email: '',
@@ -31,23 +31,23 @@ function CreateFactory() {
   };
 
 const handleChangeCorporateName = (event) => {
-    setFactory({ ...factory, corporateName:  event.target.value.toUpperCase() })
+    setFactory({ ...factory, corporate_name:  event.target.value.toUpperCase() })
   }
 
    const handleChangeFantasyName = (event) => {
-     setFactory({ ...factory, fantasyName:  event.target.value.toUpperCase() })
+     setFactory({ ...factory, fantasy_name:  event.target.value.toUpperCase() })
    }
 
    const handleChangeCnpj = (event) => {
-     const cnpj = Number(event.target.value)
+     const cnpj = event.target.value
      setFactory({ ...factory, cnpj })
    }
    const handleChangePhone = (event) => {
-    const phone = Number(event.target.value)
+    const phone = event.target.value
     setFactory({ ...factory, phone })
   }
    const handleChangeEmail = (event) => {
-    const email = Number(event.target.value)
+    const email = event.target.value
     setFactory({ ...factory, email })
   }
 
@@ -63,11 +63,11 @@ const handleChangeCorporateName = (event) => {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', width: '49%' }}>
                 <label style={{ marginBottom: '5px'}}>Nome da Empresa</label>
-                <input onChange={handleChangeCorporateName} value={factory.corporateName}/>
+                <input onChange={handleChangeCorporateName} value={factory.corporate_name}/>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', width: '49%' }}>
                 <label style={{ marginBottom: '5px'}}>Nome Fantasia</label>
-                <input onChange={handleChangeFantasyName} value={factory.fantasyName}/>
+                <input onChange={handleChangeFantasyName} value={factory.fantasy_name}/>
               </div>
             </div>
 
@@ -82,7 +82,7 @@ const handleChangeCorporateName = (event) => {
                 <input onChange={handleChangePhone} value={factory.phone}/>
               </div>
 
-             
+
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                 <label style={{ marginBottom: '5px'}}>Email </label>
