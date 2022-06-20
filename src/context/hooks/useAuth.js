@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../../config/api";
 
 export default function useAuth() {
-  const [authenticated, setAuthenticated] = useState(false)
+  const [authenticated, setAuthenticated] = useState(true)
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
 
@@ -26,6 +26,7 @@ export default function useAuth() {
     api.defaults.headers.Authorization = `Bearer ${token}`
     setAuthenticated(true)
     navigate('../orders')
+    navigate('../factories')
   }
 
   async function handleLogout(data) {

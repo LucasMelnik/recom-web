@@ -1,9 +1,11 @@
 import { useContext } from 'react'
 import { Routes as Switch, Route } from 'react-router-dom'
 import { Context } from './context/AuthContext'
+import FactoryList from './pages/factory/FactoryList.jsx'
 
 import EditOrder from './pages/order/EditOrder'
 import OrderList from './pages/order/OrderList'
+// import { CreateFactory } from './pages/factory/CreateFactory.jsx'
 
 export default function Routes() {
   const { loading } = useContext(Context)
@@ -16,6 +18,7 @@ export default function Routes() {
     <Switch>
       <Route path="orders" element={<OrderList/>} />
       <Route path="orders/:id/edit" element={<EditOrder/>} />
-    </Switch>
+      <Route path="factories/" element={<FactoryList/>} /> 
+      </Switch>
     )
 }
