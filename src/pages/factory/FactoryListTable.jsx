@@ -8,15 +8,13 @@ import { useNavigate } from 'react-router';
 
 
 export default function FactoryListTable() {
-  const [factoryLoaded, setFactoryLoaded] = useState([])
-  const [factory, SetFactory] = useState([])
+  const [factories, setFactories] = useState([])
 
   const navigate = useNavigate()
 
-
   useEffect(() => {
     api.get('factories').then((res) => {
-      setFactoryLoaded(res.data)
+      setFactories(res.data)
     })
   }, [])
 
@@ -109,22 +107,22 @@ export default function FactoryListTable() {
   const columns = [
     {
       title: 'ID',
-      dataIndex: 'key',
-      key: 'key',
-      ...getColumnSearchProps('key')
+      dataIndex: 'id',
+      key: 'id',
+      ...getColumnSearchProps('id')
     },
     {
       title: 'Nome do Fornecedor',
-      dataIndex: 'corporateName',
-      key: 'corporateName',
+      dataIndex: 'corporate_name',
+      key: 'corporate_name',
       width: 450,
-      ...getColumnSearchProps('corporateName')
+      ...getColumnSearchProps('corporate_name')
     },
     {
       title: 'Nome Fantasía',
-      dataIndex: 'fantasyName',
-      key: 'fantasyName',
-      ...getColumnSearchProps('fantasyName')
+      dataIndex: 'fantasy_name',
+      key: 'fantasy_name',
+      ...getColumnSearchProps('fantasy_name')
     },
     {
       title: 'CNPJ',
@@ -144,43 +142,11 @@ export default function FactoryListTable() {
       key: 'email',
       ...getColumnSearchProps('email')
     },
-    // {
-    //   title: 'Status',
-    //   dataIndex: 'status',
-    //   key: 'status',
-    //   ...getColumnSearchProps('status'),
-
-    //   render: (_, { status }) => {
-    //     let color = 'green'
-
-    //     if (status === 'PENDENTE DE ENVIO') {
-    //       color = 'volcano'
-    //     }
-
-    //     if (status === 'ENVIADO') {
-    //       color = 'blue'
-    //     }
-
-    //     if (status === 'CONFIRMADO') {
-    //       color = 'green'
-    //     }
-
-    //     if (status === 'FATURADO') {
-    //       color = 'slateblue'
-    //     }
-
-    //     return (
-    //       <Tag color={color} key={status}>
-    //         {status.toUpperCase()}
-    //       </Tag>
-    //     )
-    //   },
-    // },
   ];
 
   return <Table
     columns={columns}
-    dataSource={factory}
+    dataSource={factories}
     onRow={(record, rowIndex) => {
       return {
         onClick: event => {
