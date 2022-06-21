@@ -1,0 +1,18 @@
+.suggestionContainer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-top: 55px;
+  background: white;
+  width: 82%;
+}
+
+.suggestion {
+  border: 1px solid black;
+  padding: 0px 5px;
+}
+
+.suggestion:hover {
+  cursor: pointer;
+  background-color: #40A9FF;
+}

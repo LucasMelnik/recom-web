@@ -17,6 +17,7 @@ export default function Routes() {
 
   return(
     <Switch>
+<<<<<<< HEAD
       {/* <Route path="/auth" element={<Login/>} /> */}
       <Route path="/orders" element={<OrderList/>} />
       <Route path="/orders/new" element={<CreateOrder/>} />
@@ -24,6 +25,11 @@ export default function Routes() {
       <Route path="/factories/new" element={<CreateFactory/>} />
             
 
+=======
+      <Route path="orders" element={<OrderList/>}>
+        <Route path="new" element={<CreateOrder/>} />
+      </Route>
+>>>>>>> 18b462b3fe092013235580c01d798af2c27f759a
     </Switch>
     )
 }
