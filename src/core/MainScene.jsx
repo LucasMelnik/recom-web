@@ -1,8 +1,8 @@
 import { useContext } from "react"
-import { Context } from "../../context/AuthContext"
-import Login from "../../pages/login/Login"
-import Routes from "../../Routes"
-import Header from "./menu/Header"
+import { Context } from "../context/AuthContext"
+import Login from "../pages/login/Login"
+import Routes from "../Routes"
+import Header from "./layout/menu/Header"
 
 export default function MainScene() {
   const { authenticated } = useContext(Context)
