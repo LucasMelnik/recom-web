@@ -202,7 +202,7 @@ export default function OrderListTable() {
     onRow={(record, rowIndex) => {
       return {
         onClick: event => {
-          navigate(`./${record.key}`)
+          navigate(`./${record.key}/items`)
         },
       }
     }}
