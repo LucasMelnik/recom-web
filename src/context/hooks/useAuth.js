@@ -26,6 +26,7 @@ export default function useAuth() {
     api.defaults.headers.Authorization = `Bearer ${token}`
     setAuthenticated(true)
     navigate('../orders')
+    navigate('../factories')
   }
 
   async function handleLogout(data) {
