@@ -108,7 +108,7 @@ export default function CustomerListTable() {
     {
       title: 'ID',
       dataIndex: 'id',
-      key: 'id',
+      key: 'key',
       ...getColumnSearchProps('id')
     },
     {
@@ -214,7 +214,7 @@ export default function CustomerListTable() {
     //     key: 'zip',
     //     ...getColumnSearchProps('zip')
     // },
-      
+
   ];
 
   return <Table

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Button, Space } from 'antd';
-import { useForm } from 'react-hook-form';
 import api from '../../config/api';
 import '../order/styles/createOrderModal.css'
 import { useNavigate } from 'react-router-dom';
@@ -16,24 +15,15 @@ function CreateCustomer() {
     phone: '',
     email:'',
     purchase_credit:'',
-    customer_address:'',
-    address_number:'',
-    complement:'',
-    district:'',
-    city:'',
-    state:'',
-    country:'',
-    zip:'',
   })
 
-  const navigate = useNavigate()
   const showModal = () => {
     setIsModalVisible(true);
   };
 
   const handleOk = async () => {
     await api.post('/customers', customer).then((res) => {
-      navigate(`./${res.data.id}/items`)
+      window.location.reload()
     })
   };
 
@@ -54,12 +44,12 @@ const handleChangeCorporateName = (event) => {
      setCustomer({ ...customer, cnpj })
    }
    const handleChangeStateRegistration = (event) => {
-    const cnpj = event.target.value
-    setStateRegistration({ ...customer, state_registration })
+    const state_registration = event.target.value
+    setCustomer({ ...customer, state_registration })
   }
 
   const handleChangeBuyer = (event) => {
-    const buyer= event.target.value
+    const buyer= event.target.value.toUpperCase()
     setCustomer({ ...customer, buyer })
   }
 
@@ -72,50 +62,10 @@ const handleChangeCorporateName = (event) => {
     const email = event.target.value
     setCustomer({ ...customer, email })
   }
-  
+
   const handleChangePurchaseCredit = (event) => {
     const purchase_credit= event.target.value
     setCustomer({ ...customer, purchase_credit })
-  }
-
-  const handleChangeCustomerAddress = (event) => {
-    const customer_address = event.target.value
-    setCustomer({ ...customer, customer_address })
-  }
-  
-  const handleChangeAddressNumber = (event) => {
-    const address_number = event.target.value
-    setCustomer({ ...customer, address_number })
-  }
-
-  const handleChangeComplement = (event) => {
-    const complement = event.target.value
-    setCustomer({ ...customer, complement })
-  }
-
-  const handleChangeDistrict = (event) => {
-    const district = event.target.value
-    setCustomer({ ...customer, district })
-  }
-
-  const handleChangeCity = (event) => {
-    const city = event.target.value
-    setCustomer({ ...customer, city })
-  }
-
-  const handleChangeState = (event) => {
-    const state = event.target.value
-    setCustomer({ ...customer, state })
-  }
-
-  const handleChangeCountry = (event) => {
-    const country = event.target.value
-    setCustomer({ ...customer, country })
-  }
-
-  const handleChangeZip = (event) => {
-    const zip = event.target.value
-    setCustomer({ ...customer, zip })
   }
 
   return (
@@ -145,7 +95,7 @@ const handleChangeCorporateName = (event) => {
                 <label style={{ marginBottom: '5px'}}>CNPJ</label>
                 <input onChange={handleChangeCnpj} value={customer.cnpj}/>
               </div>
-                
+
               <div style={{ display: 'flex', flexDirection: 'column', width: '49%' }}>
                 <label style={{ marginBottom: '5px'}}>Inscrição Estadual</label>
                 <input onChange={handleChangeStateRegistration} value={customer.state_registration}/>
@@ -173,56 +123,6 @@ const handleChangeCorporateName = (event) => {
                     <input onChange={handleChangePurchaseCredit} value={customer.purchase_credit}/>
                 </div>
             </div>
-
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
-                
-                <div style={{ display: 'flex', flexDirection: 'column', width: '49%' }}>
-                    <label style={{ marginBottom: '5px'}}>Endereço </label>
-                    <input onChange={handleChangeCustomerAddress} value={customer.customer_address}/>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', width: '49%' }}>
-                    <label style={{ marginBottom: '5px'}}>Número </label>
-                    <input onChange={handleChangeAddressNumber} value={customer.address_number}/>
-                </div>
-            </div>
-
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}> 
-                <div style={{ display: 'flex', flexDirection: 'column', width: '49%' }}>
-                    <label style={{ marginBottom: '5px'}}>Complemento </label>
-                    <input onChange={handleChangeComplement} value={customer.complement}/>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', width: '49%' }}>
-                    <label style={{ marginBottom: '5px'}}>Bairro </label>
-                    <input onChange={handleChangeDistrict} value={customer.district}/>
-                </div>
-            </div>
-
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
-                
-                <div style={{ display: 'flex', flexDirection: 'column', width: '49%' }}>
-                    <label style={{ marginBottom: '5px'}}>Cidade </label>
-                    <input onChange={handleChangeCity} value={customer.city}/>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', width: '49%' }}>
-                    <label style={{ marginBottom: '5px'}}>Estado </label>
-                    <input onChange={handleChangeState} value={customer.state}/>
-                </div>
-            </div>
-
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
-                
-                <div style={{ display: 'flex', flexDirection: 'column', width: '49%' }}>
-                    <label style={{ marginBottom: '5px'}}>País </label>
-                    <input onChange={handleChangeCountry} value={customer.country}/>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', width: '49%' }}>
-                    <label style={{ marginBottom: '5px'}}>CEP </label>
-                    <input onChange={handleChangeZip} value={customer.zip}/>
-              </div>
-            </div>
-            
-
-
           </Space>
         </form>
       </Modal>
