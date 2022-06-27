@@ -5,7 +5,7 @@ import FactoryListTable from "./FactoryListTable";
 export default function FactoryList() {
 
   return (
-    <Space direction="vertical">
+    <Space direction="vertical" style={{ width: '100%' }}>
       <Space size="small">
         <CreateFactory />
         <Button>Relatório</Button>

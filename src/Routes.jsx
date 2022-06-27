@@ -2,11 +2,12 @@ import { useContext } from 'react'
 import { Routes as Switch, Route } from 'react-router-dom'
 import { Context } from './context/AuthContext'
 
-import Login from './pages/login/Login'
-import CreateOrder from './pages/order/CreateOrderModal'
+import FactoryList from './pages/factory/FactoryList.jsx'
+import OrderItems from './pages/order/OrderItems'
 import OrderList from './pages/order/OrderList'
-import CustomerList from './pages/customer/CustomerList'
-import CreateCustomer from './pages/customer/CreateCustomer'
+import CreateProduct from './pages/product/CreateProduct'
+import ProductList from './pages/product/ProductList'
+// import { CreateFactory } from './pages/factory/CreateFactory.jsx'
 
 export default function Routes() {
   const { loading } = useContext(Context)
@@ -17,11 +18,15 @@ export default function Routes() {
 
   return(
     <Switch>
-      {/* <Route path="/auth" element={<Login/>} /> */}
+      <Route path='/' element={<OrderList/>} />
+
+      <Route path="/products" element={<ProductList/>} />
+      <Route path="/products/new" element={<CreateProduct/>} />
+
       <Route path="/orders" element={<OrderList/>} />
-      <Route path="/orders/new" element={<CreateOrder/>} />
-      <Route path="/customers/new" element={<CreateCustomer/>} />
-      <Route path="/customers/" element={<CustomerList/>}/>
-    </Switch>
+      <Route path="/orders/:id/items" element={<OrderItems/>} />
+
+      <Route path="factories/" element={<FactoryList/>} />
+      </Switch>
     )
 }

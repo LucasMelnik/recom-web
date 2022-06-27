@@ -25,3 +25,6 @@ dist-ssr
 *.sw?
 
 .node_modules
+.history
+yarn.lock
+package.json
