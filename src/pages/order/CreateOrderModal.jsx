@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Modal, Button, Space } from 'antd';
-import { useForm } from 'react-hook-form';
 import api from '../../config/api';
 import './styles/createOrderModal.css'
 import { useNavigate } from 'react-router-dom';
@@ -129,7 +128,7 @@ function CreateOrderModal() {
           <Space direction="vertical" style={{ display: 'flex' }}>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', width: '90%' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                 <label style={{ marginBottom: '5px'}}>Cliente</label>
                 <input
                   onChange={e => handleChangeCustomer(e.target.value)}
@@ -153,7 +152,7 @@ function CreateOrderModal() {
                   )}
                 </div>
               </div>
-              <Button type='primary' size="middle">+</Button>
+
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column' }}>
