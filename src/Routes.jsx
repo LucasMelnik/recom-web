@@ -7,7 +7,7 @@ import OrderItems from './pages/order/OrderItems'
 import OrderList from './pages/order/OrderList'
 import CreateProduct from './pages/product/CreateProduct'
 import ProductList from './pages/product/ProductList'
-// import { CreateFactory } from './pages/factory/CreateFactory.jsx'
+import CustomerList from './pages/customer/CustomerList'
 
 export default function Routes() {
   const { loading } = useContext(Context)
@@ -24,9 +24,11 @@ export default function Routes() {
       <Route path="/products/new" element={<CreateProduct/>} />
 
       <Route path="/orders" element={<OrderList/>} />
-      <Route path="/orders/:id/items" element={<OrderItems/>} />
+      <Route path="/orders/:id" element={<OrderItems/>} />
 
       <Route path="factories/" element={<FactoryList/>} />
+
+      <Route path="customers/" element={<CustomerList/>} />
       </Switch>
     )
 }

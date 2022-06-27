@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Modal, Button, Space } from 'antd';
 import api from '../../config/api';
 import '../order/styles/createOrderModal.css'
-import { useNavigate } from 'react-router-dom';
 
 function CreateCustomer() {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -14,7 +13,6 @@ function CreateCustomer() {
     buyer: '',
     phone: '',
     email:'',
-    purchase_credit:'',
   })
 
   const showModal = () => {
@@ -64,7 +62,7 @@ const handleChangeCorporateName = (event) => {
   }
 
   const handleChangePurchaseCredit = (event) => {
-    const purchase_credit= event.target.value
+    const purchase_credit = (event.target.value)
     setCustomer({ ...customer, purchase_credit })
   }
 

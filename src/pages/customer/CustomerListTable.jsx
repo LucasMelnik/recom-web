@@ -115,55 +115,47 @@ export default function CustomerListTable() {
       title: 'Nome do Cliente',
       dataIndex: 'corporate_name',
       key: 'corporate_name',
-      width: 200,
       ...getColumnSearchProps('corporate_name')
     },
     {
       title: 'Nome Fantasía',
       dataIndex: 'fantasy_name',
       key: 'fantasy_name',
-      width: 200,
       ...getColumnSearchProps('fantasy_name')
     },
     {
       title: 'CNPJ',
       dataIndex: 'cnpj',
       key: 'cnpj',
-      width: 150,
       ...getColumnSearchProps('cnpj')
     },
     {
       title: 'Estado de Registro',
       dataIndex: 'state_registration',
-      width: 150,
       key: 'state_registration'
     },
     {
       title: 'Comprador',
       dataIndex: 'buyer',
       key: 'buyer',
-      width: 150,
       ...getColumnSearchProps('buyer')
     },
     {
         title: 'Phone',
         dataIndex: 'phone',
         key: 'phone',
-        width: 150,
         ...getColumnSearchProps('phone')
     },
     {
         title: 'Email',
         dataIndex: 'email',
         key: 'email',
-        width: 150,
         ...getColumnSearchProps('email')
     },
     {
         title: 'Credito de Compra',
         dataIndex: 'purchase_credit',
         key: 'purchase_credit',
-        width: 150,
         ...getColumnSearchProps('purchase_credit')
     },
     // {

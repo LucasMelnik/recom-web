@@ -6,11 +6,7 @@ export default function OrderList() {
 
   return (
     <Space direction="vertical" style={{ width: '100%' }}>
-      <Space size="small">
-        <CreateOrderModal />
-        <Button>Relatório</Button>
-      </Space>
-
+      <CreateOrderModal />
       <OrderListTable />
     </Space>
   );

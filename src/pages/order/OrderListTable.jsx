@@ -151,12 +151,6 @@ export default function OrderListTable() {
       ...getColumnSearchProps('seller')
     },
     {
-      title: 'Total',
-      dataIndex: 'total',
-      width: 100,
-      key: 'total'
-    },
-    {
       title: 'Data',
       dataIndex: 'order_date',
       key: 'order_date',

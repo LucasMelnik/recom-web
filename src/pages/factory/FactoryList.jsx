@@ -6,11 +6,7 @@ export default function FactoryList() {
 
   return (
     <Space direction="vertical" style={{ width: '100%' }}>
-      <Space size="small">
-        <CreateFactory />
-        <Button>Relatório</Button>
-      </Space>
-
+      <CreateFactory />
       <FactoryListTable />
     </Space>
   );

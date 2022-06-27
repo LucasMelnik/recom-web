@@ -15,14 +15,13 @@ function CreateFactory() {
     email: '',
   })
 
-  const navigate = useNavigate()
   const showModal = () => {
     setIsModalVisible(true);
   };
 
   const handleOk = async () => {
     await api.post('/factories', factory).then((res) => {
-      navigate(`./${res.data.id}/items`)
+      window.location.reload()
     })
   };
 

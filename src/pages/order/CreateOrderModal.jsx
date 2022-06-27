@@ -48,7 +48,7 @@ function CreateOrderModal() {
 
   const handleOk = async () => {
     await api.post('/orders', order).then((res) => {
-      navigate(`./${res.data.id}/items`)
+      navigate(`./${res.data.id}`)
     })
   };
 

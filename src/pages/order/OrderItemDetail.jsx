@@ -85,6 +85,7 @@ export default function OrderItemDetail({ orderId, setTotalValue, setTotalPairs 
 
   return (
     <Table
+      pagination={false}
       columns={columns}
       dataSource={tableItems}
     />
