@@ -7,36 +7,16 @@ import { useNavigate } from 'react-router';
 
 
 
-export default function OrderListTable() {
-  const [ordersLoaded, setOrdersLoaded] = useState([])
-  const [orders, SetOrders] = useState([])
+export default function CustomerListTable() {
+  const [customers, setCustomers] = useState([])
 
   const navigate = useNavigate()
 
-
   useEffect(() => {
-    api.get('orders').then((res) => {
-      setOrdersLoaded(res.data)
+    api.get('customers').then((res) => {
+      setCustomers(res.data)
     })
   }, [])
-
-  useEffect(() => {
-    SetOrders([])
-    ordersLoaded.map((order) => {
-      SetOrders((prevState) => [
-        ...prevState,
-        {
-          key: order.id,
-          customer: order.customer.corporate_name,
-          factory: order.factory.fantasy_name,
-          seller: order.seller.nickname,
-          total: null,
-          order_date: order.order_date,
-          status: order.status.name
-        }
-      ])
-    })
-  }, [ordersLoaded])
 
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
@@ -127,78 +107,119 @@ export default function OrderListTable() {
   const columns = [
     {
       title: 'ID',
-      dataIndex: 'key',
+      dataIndex: 'id',
       key: 'key',
-      ...getColumnSearchProps('key')
+      ...getColumnSearchProps('id')
     },
     {
-      title: 'Cliente',
-      dataIndex: 'customer',
-      key: 'customer',
-      width: 450,
-      ...getColumnSearchProps('customer')
+      title: 'Nome do Cliente',
+      dataIndex: 'corporate_name',
+      key: 'corporate_name',
+      width: 200,
+      ...getColumnSearchProps('corporate_name')
     },
     {
-      title: 'Fábrica',
-      dataIndex: 'factory',
-      key: 'factory',
-      ...getColumnSearchProps('factory')
+      title: 'Nome Fantasía',
+      dataIndex: 'fantasy_name',
+      key: 'fantasy_name',
+      width: 200,
+      ...getColumnSearchProps('fantasy_name')
     },
     {
-      title: 'Vendedor',
-      dataIndex: 'seller',
-      key: 'seller',
-      ...getColumnSearchProps('seller')
+      title: 'CNPJ',
+      dataIndex: 'cnpj',
+      key: 'cnpj',
+      width: 150,
+      ...getColumnSearchProps('cnpj')
     },
     {
-      title: 'Total',
-      dataIndex: 'total',
-      width: 100,
-      key: 'total'
+      title: 'Estado de Registro',
+      dataIndex: 'state_registration',
+      width: 150,
+      key: 'state_registration'
     },
     {
-      title: 'Data',
-      dataIndex: 'order_date',
-      key: 'order_date',
-      ...getColumnSearchProps('order_date')
+      title: 'Comprador',
+      dataIndex: 'buyer',
+      key: 'buyer',
+      width: 150,
+      ...getColumnSearchProps('buyer')
     },
     {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-      ...getColumnSearchProps('status'),
-
-      render: (_, { status }) => {
-        let color = 'green'
-
-        if (status === 'PENDENTE DE ENVIO') {
-          color = 'volcano'
-        }
-
-        if (status === 'ENVIADO') {
-          color = 'blue'
-        }
-
-        if (status === 'CONFIRMADO') {
-          color = 'green'
-        }
-
-        if (status === 'FATURADO') {
-          color = 'slateblue'
-        }
-
-        return (
-          <Tag color={color} key={status}>
-            {status.toUpperCase()}
-          </Tag>
-        )
-      },
+        title: 'Phone',
+        dataIndex: 'phone',
+        key: 'phone',
+        width: 150,
+        ...getColumnSearchProps('phone')
     },
+    {
+        title: 'Email',
+        dataIndex: 'email',
+        key: 'email',
+        width: 150,
+        ...getColumnSearchProps('email')
+    },
+    {
+        title: 'Credito de Compra',
+        dataIndex: 'purchase_credit',
+        key: 'purchase_credit',
+        width: 150,
+        ...getColumnSearchProps('purchase_credit')
+    },
+    // {
+    //     title: 'Endereço',
+    //     dataIndex: 'customer_address',
+    //     key: 'customer_address',
+    //     ...getColumnSearchProps('customer_address')
+    // },
+    // {
+    //     title: 'Número',
+    //     dataIndex: 'address_number',
+    //     key: 'address_number',
+    //     ...getColumnSearchProps('address_number')
+    // },
+    // {
+    //     title: 'Complemento',
+    //     dataIndex: 'complement',
+    //     key: 'complement',
+    //     ...getColumnSearchProps('complement')
+    // },
+    // {
+    //     title: 'Bairro',
+    //     dataIndex: 'district',
+    //     key: 'district',
+    //     ...getColumnSearchProps('district')
+    // },
+    // {
+    //     title: 'Cidade',
+    //     dataIndex: 'city',
+    //     key: 'city',
+    //     ...getColumnSearchProps('city')
+    // },
+    // {
+    //     title: 'Estado',
+    //     dataIndex: 'state',
+    //     key: 'state',
+    //     ...getColumnSearchProps('state')
+    // },
+    // {
+    //     title: 'País',
+    //     dataIndex: 'country',
+    //     key: 'country',
+    //     ...getColumnSearchProps('country')
+    // },
+    // {
+    //     title: 'CEP',
+    //     dataIndex: 'zip',
+    //     key: 'zip',
+    //     ...getColumnSearchProps('zip')
+    // },
+
   ];
 
   return <Table
     columns={columns}
-    dataSource={orders}
+    dataSource={customers}
     onRow={(record, rowIndex) => {
       return {
         onClick: event => {

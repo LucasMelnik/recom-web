@@ -11,12 +11,14 @@
     "@ant-design/icons": "^4.7.0",
     "antd": "^4.20.6",
     "axios": "^0.27.2",
+    "npx": "^10.2.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-highlight-words": "^0.18.0",
     "react-hook-form": "^7.31.3",
     "react-router": "^6.3.0",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "sequelize": "^6.20.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
