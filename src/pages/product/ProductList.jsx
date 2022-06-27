@@ -1,4 +1,5 @@
-import { Button, Card, Col, Image, Row, Space } from "antd";
+import { Button, Card, Col, Image, Row, Select, Space } from "antd";
+import Input from "antd/lib/input/Input";
 import { Content } from "antd/lib/layout/layout";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -6,22 +7,58 @@ import api from "../../config/api";
 
 export default function ProductList() {
   const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState([]);
+  const [factories, setFactories] = useState([]);
+
+  const handleInputChange = (event, select_name) => {
+    const name = select_name ? select_name : event.target.name
+    console.log(event);
+    const value = event.target ? event.target.value : event;
+    setSearch({ ...search, [name]: value })
+  };
 
   async function getProducts() {
-    const response = await api.get("/products");
+    console.log(search);
+    const response = await api.get('/products', { params: search});
     setProducts(response.data);
-    console.log(response.data);
   }
 
   useEffect(() => {
+
+    api.get('/factories').then((res) => {
+      setFactories(res.data)
+    });
+
     getProducts();
-  }, []);
+  }, [search]);
 
   return (
     <Content>
         <Button type="primary">
           <Link to="/products/new">Novo Produto</Link>
         </Button>
+
+
+        <Row gutter={16}>
+          <Col style={{display: 'flex', flexDirection: 'column'}}>
+            <label>Selecionar Fábrica</label>
+            <Select onChange={(value) => handleInputChange(value, 'factory_id')} 
+            name="factory_id" 
+            placeholder="Fábrica" 
+            >
+              <Option value="" key='0'>Todas</Option>
+              {
+                factories?.map((factory) => (
+                  <Option value={factory.id}  key={factory.id}> {factory.fantasy_name} </Option>
+                ))
+              }
+            </Select>
+          </Col>
+          <Col>
+            <label >Referência</label>
+            <Input name="ref" placeholder="Referência" onChange={handleInputChange}></Input>
+          </Col>
+        </Row>
 
       <div className="cards">
         <Row gutter={16} style={{  marginTop: '1em' }}>
