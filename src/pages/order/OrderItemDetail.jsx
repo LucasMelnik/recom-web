@@ -1,6 +1,5 @@
 import { Table } from "antd";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import api from "../../config/api";
 
 const columns = [
@@ -39,12 +38,16 @@ const columns = [
 export default function OrderItemDetail({ orderId, setTotalValue, setTotalPairs }) {
   const [items, setItems] = useState([])
   const [tableItems, setTableItems] = useState([])
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [colors, setColors] = useState([])
+
 
   useEffect(() => {
     api.get(`/order-items/${orderId}`).then((res) => {
       setItems(res.data)
     })
-    console.log(items)
+
+    api.get(`/colors`).then(res => setColors(res.data))
   }, [])
 
   useEffect(() => {
@@ -60,28 +63,29 @@ export default function OrderItemDetail({ orderId, setTotalValue, setTotalPairs 
       const total = Number.parseFloat(unit_value * quantity).toFixed(2)
 
       totalPairs = totalPairs + quantity;
-
       totalValue = Number(totalValue) + Number(total)
 
-      setTableItems((prevState) => [
-        ...prevState,
-        {
-          key: item.id,
-          ref: item.product_price.product.ref,
-          color: item.product_price.product.color,
-          size: item.size.name,
-          quantity,
-          unit_value,
-          total,
-        }
-      ])
+      const itemColor = colors.find(color => color.id == item.color_id)
+
+      if (itemColor) {
+        setTableItems((prevState) => [
+          ...prevState,
+          {
+            key: item.id,
+            ref: item.product_price.product.ref,
+            size: item.size.name,
+            quantity,
+            unit_value,
+            total,
+            color: itemColor.name
+          }
+        ])
+      }
     })
 
     setTotalPairs(totalPairs)
     setTotalValue(totalValue)
-
   }, [items])
-
 
   return (
     <Table

@@ -8,7 +8,8 @@ import './styles/createOrderModal.css'
 export default function AddOrderItemModal({ factoryId, commissionId, paymentConditionsId, orderId }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [products, setProducts] = useState([])
-  const [colors, setColors] = useState([])
+  const [color, setColor] = useState()
+  const [productcolors, setProductColors] = useState([])
   const [refs, setRefs] = useState([])
   const [refSuggestions, setRefSuggestions] = useState([])
   const [sizes, setSizes] = useState([])
@@ -20,7 +21,6 @@ export default function AddOrderItemModal({ factoryId, commissionId, paymentCond
   })
   const [itemSizes, setItemSizes] = useState([])
   const [productPrices, setProductPrices] = useState([])
-  const [product, setProduct] = useState()
 
   useEffect(() => {
     api.get(`/factories/${factoryId}/products`).then((res) => {
@@ -41,18 +41,6 @@ export default function AddOrderItemModal({ factoryId, commissionId, paymentCond
     setRefs([...new Set(allRefs)])
   }, [products])
 
-  useEffect(() => {
-    setColors([])
-    products.map((product) => {
-      if (product.ref === item.ref) {
-        setColors((prevState) => [
-          ...prevState,
-          product.color
-        ])
-      }
-    })
-  }, [item.ref])
-
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -63,7 +51,8 @@ export default function AddOrderItemModal({ factoryId, commissionId, paymentCond
         order_id: orderId,
         product_price_id: productPrices.id,
         size_id: size.size,
-        quantity: size.quantity
+        quantity: size.quantity,
+        color_id: color
       }
 
       api.post('/order-items', object).then((res) => {
@@ -79,6 +68,9 @@ export default function AddOrderItemModal({ factoryId, commissionId, paymentCond
   };
 
   const handleChangeRef = (text) => {
+    setProductPrices(null)
+    setProductColors([])
+
     let matches = []
     if (text.length > 0) {
       matches = refs.filter(ref => {
@@ -88,30 +80,27 @@ export default function AddOrderItemModal({ factoryId, commissionId, paymentCond
     }
     setRefSuggestions(matches)
     setItem({...item, ref: text})
+    const actualRef = products.find((product) => product.ref === text)
+
+    if (actualRef) {
+      api.get(`/colors/${actualRef.id}`).then((res) => {
+        setProductColors(res.data)
+      })
+
+      api.get(`product-prices/${commissionId}/${paymentConditionsId}/${actualRef.id}`).then((res) => {
+        setProductPrices(res.data)
+      })
+    }
   }
 
   const onSuggestRefHandler = (text) => {
-    setItem({...item, ref: text})
+    handleChangeRef(text)
     setRefSuggestions([])
   }
 
   const handleChangeColor = (event) => {
-    setItem({...item, color: event.target.value})
+    setColor(Number(event.target.value))
   }
-
-  useEffect(() => {
-    const found = products.find(element => element.ref === item.ref && element.color === item.color)
-    setProduct(found)
-  }, [item.color])
-
-  useEffect(() => {
-
-    if (product != undefined) {
-      api.get(`product-prices/${commissionId}/${paymentConditionsId}/${product.id}`).then((res) => {
-        setProductPrices(res.data)
-      })
-    }
-  }, [product])
 
   const handleChangeSize = (event) => {
     const filteredSizes = itemSizes.filter((size) => size.size !== Number(event.target.id))
@@ -178,8 +167,8 @@ export default function AddOrderItemModal({ factoryId, commissionId, paymentCond
                 <select onChange={handleChangeColor} style={{ height: '28px', width: '276px' }}>
                   <option>Selecionar...</option>
                   {
-                    colors.map((color, index) => {
-                      return <option key={index} value={color}>{color}</option>
+                    productcolors.map((color, index) => {
+                      return <option key={index} value={color.id}>{color.name}</option>
                     })
                   }
                 </select>
